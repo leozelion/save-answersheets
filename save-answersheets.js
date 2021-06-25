@@ -107,7 +107,11 @@ async function readAndProcessInstructionFile(instructionFile) {
     await createPath(path.resolve('output'));
     await createPath(filepath);
 
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+        // Point to existing Chrome install because NPM won't install Chromium
+        // https://github.com/puppeteer/puppeteer/issues/6560#issuecomment-719976065
+        executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'
+    });
 
     let action;
     let cookies = '';
